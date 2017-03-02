@@ -1,3 +1,11 @@
 body{
+	background-image: url(../images/skyline.jpg);
 	margin-top: 40px;
+}
+h1{
+	padding-bottom:100px;
+}
+.jumbotron{
+	background-color: #B5D3E7;
+	opacity: 0.9;
 }
