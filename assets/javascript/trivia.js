@@ -50,7 +50,8 @@ $("#questions").append("<button>" + "start" + "</button>");
 $("button").css({"width":"300px","height":"50px","font-size":"30px"});
 //on click button will disappear and questions and answers will appear
 $("button").click(function(){
-$("#questions").empty();
+	$("#questions").empty();
+
 // adds questions to page
 
 // for (var i = 0; i = questions.length;i++){
@@ -71,23 +72,35 @@ $("#questions").empty();
 
  questions.map(function(e,index){
 	//creates buttons dynamically
-	var questionAnswer = e.answer;
 	
+	var questionAnswer = e.answer;
+
+	var newForm = $("<form>");
+
+	
+	$("#questions").append(newForm);
 	
 	//creates questions dynamically
-	var newDiv = $("<h3>");
-	$(newDiv).append(e.question);
-	$("#questions").append(newDiv);
+	var questionHeader = $("<h3>");
+	
+	$(questionHeader).append(e.question);
+	
+	$(newForm).append(questionHeader);
+	
 	$("#answers").append(answerBtn);
 
     // adding buttons dynamically
 	for(var i = 0; i < questionAnswer.length;i++){
 	var answerBtn = $("<input>");
-	$(answerBtn).attr({"type":"radio","value":questionAnswer[i]});
-	$(answerBtn).append(questionAnswer[i]);
-	$(answerBtn).html(questionAnswer[i]);
-	$("#questions").append(answerBtn);
-		
+	
+
+	$(answerBtn).attr({"type":"radio","value":questionAnswer[i],"name":e.value});
+	$(answerBtn).addClass("values");
+
+	$(answerBtn).text(questionAnswer[i]);
+	
+	$(newForm).append(answerBtn);
+	
 	}
 	
 	
