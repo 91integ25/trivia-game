@@ -10,23 +10,27 @@ var unanswered = [];
 var questions = [{
 	question: "where is your main house?",
 	answer:["AL","NY","WV","GA"],
-	correct:"NY"
+	correct:"NY",
+	value:"location"
 
 },
 {
-	question: "where is your car?",
-	answer:["CA","VM","WV","SC"],
-	correct:"WV"
+	question: "what is your car?",
+	answer:["BMW","Toyota","VW","FORD"],
+	correct:"VW",
+	value:"car"
 },
 {
-	question: "where is your duck?",
-	answer:["AL","TX","NM","OR"],
-	correct:"AL"
+	question: "what is your duck?",
+	answer:["mallard","green","goose","swan"],
+	correct:"swan",
+	value:"duck"
 },
 {
-	question: "where is your farm?",
-	answer:["NV","SD","ND","GA"],
-	correct:"GA"
+	question: "which is your farm?",
+	answer:["tyson","pepperidge","jojo","old"],
+	correct:"pepperidge",
+	value:"farm"
 }
 ];
 // function used to countdown the time remaining
@@ -49,46 +53,46 @@ $("button").click(function(){
 $("#questions").empty();
 // adds questions to page
 
-for (var i = 0; i = questions.length;i++){
-	unanswered = questions.pop();
+// for (var i = 0; i = questions.length;i++){
+// 	unanswered = questions.pop();
 
-	var newDiv = $("<h3>");
-	$(newDiv).append(unanswered.question);
-	$("#questions").append(newDiv);
-
-	var answerBtn = $("<input>");
-	$(answerBtn).attr({"type":"radio", "value":"location"});
-	$(answerBtn).append(unanswered.answer[i]);
-	$("#quetions").append(answerBtn);
-	console.log(unanswered.answer[i]);
-}
-
-
-
-// questions.map(function(e,index){
-// 	//creates buttons dynamically
-// 	var questionAnswer = e.answer;
-// 	var answerBtn = $("<input>");
-// 	$(answerBtn).attr({"type":"radio", "value":"location"});
-
-	
-// 	for(var i = 0; i < questionAnswer.length;i++){
-// 	var answerBtn = $("<input>");
-// 	$(answerBtn).attr({"type":"radio", "value":"location"});
-// 	$(answerBtn).append(questionAnswer[i]);
-// 		console.log(questionAnswer[i]);
-// 	}
-	
-// 	//creates questions dynamically
 // 	var newDiv = $("<h3>");
-// 	$(newDiv).append(e.question);
+// 	$(newDiv).append(unanswered.question);
 // 	$("#questions").append(newDiv);
-// 	$("#answers").append(answerBtn);
-    
 
+// 	var answerBtn = $("<input>");
+// 	$(answerBtn).attr({"type":"radio", "value":"location"});
+// 	$(answerBtn).append(unanswered.answer[i]);
+// 	$("#quetions").append(answerBtn);
+// 	console.log(unanswered.answer[i]);
+// }
+
+
+
+ questions.map(function(e,index){
+	//creates buttons dynamically
+	var questionAnswer = e.answer;
 	
 	
-// });
+	//creates questions dynamically
+	var newDiv = $("<h3>");
+	$(newDiv).append(e.question);
+	$("#questions").append(newDiv);
+	$("#answers").append(answerBtn);
+
+    // adding buttons dynamically
+	for(var i = 0; i < questionAnswer.length;i++){
+	var answerBtn = $("<input>");
+	$(answerBtn).attr({"type":"radio","value":questionAnswer[i]});
+	$(answerBtn).append(questionAnswer[i]);
+	$(answerBtn).html(questionAnswer[i]);
+	$("#questions").append(answerBtn);
+		
+	}
+	
+	
+	
+});
 
 });
 
