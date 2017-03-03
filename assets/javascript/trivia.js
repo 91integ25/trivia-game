@@ -34,14 +34,7 @@ var questions = [{
 }
 ];
 // function used to countdown the time remaining
-// var countDown = setInterval(function () {
-// 	count--;
-// 	console.log(count)
-// 	if(count <= 0){
-// 		console.log("Time is up!!");
-// 		clearInterval(countDown);
-// 	}
-// }, 1000);
+
 
 var questionDiv = $("#questions");
 
@@ -52,60 +45,65 @@ $("button").css({"width":"300px","height":"50px","font-size":"30px"});
 $("button").click(function(){
 	$("#questions").empty();
 
-// adds questions to page
+	var timerDiv = $("<div>");
 
-// for (var i = 0; i = questions.length;i++){
-// 	unanswered = questions.pop();
-
-// 	var newDiv = $("<h3>");
-// 	$(newDiv).append(unanswered.question);
-// 	$("#questions").append(newDiv);
-
-// 	var answerBtn = $("<input>");
-// 	$(answerBtn).attr({"type":"radio", "value":"location"});
-// 	$(answerBtn).append(unanswered.answer[i]);
-// 	$("#quetions").append(answerBtn);
-// 	console.log(unanswered.answer[i]);
-// }
-
-
-
- questions.map(function(e,index){
-	//creates buttons dynamically
+	$(timerDiv).text("Time remaining: " + count);
+	$("#questions").append(timerDiv);
 	
-	var questionAnswer = e.answer;
-
-	var newForm = $("<form>");
-
+	function timer(){var countDown = setInterval(function () {
+	count--;
+	$(timerDiv).text("Time remaining: " + count);
 	
-	$("#questions").append(newForm);
-	
-	//creates questions dynamically
-	var questionHeader = $("<h3>");
-	
-	$(questionHeader).append(e.question);
-	
-	$(newForm).append(questionHeader);
-	
-	$("#answers").append(answerBtn);
-
-    // adding buttons dynamically
-	for(var i = 0; i < questionAnswer.length;i++){
-	var answerBtn = $("<input>");
-	
-
-	$(answerBtn).attr({"type":"radio","value":questionAnswer[i],"name":e.value});
-	$(answerBtn).addClass("values");
-
-	$(answerBtn).text(questionAnswer[i]);
-	
-	$(newForm).append(answerBtn);
-	
+	if(count <= 0){
+		console.log("Time is up!!");
+		clearInterval(countDown);
 	}
-	
-	
-	
+}, 1000);
+}
+
+ questions.map(function(e, index) { 
+ //creates buttons dynamically
+  var questionAnswer = e.answer;
+  var newForm = $("<form>");
+
+  $("#questions").append(newForm);
+
+  //creates questions dynamically
+  var questionHeader = $("<h3>");
+
+  $(questionHeader).append(e.question);
+  $(newForm).append(questionHeader);
+  $("#answers").append(answerBtn);
+
+  // adding buttons dynamically
+  for (var i = 0; i < questionAnswer.length; i++) {
+    var answerBtn = $("<input>");
+    var answerLabel = $("<label>").text(questionAnswer[i]);
+
+    $(answerBtn).attr({
+      "type": "radio",
+      "name": e.value,
+      "value": questionAnswer[i]
+
+    });
+
+    $(answerBtn).addClass("values");
+
+    $(answerLabel).append(answerBtn);
+    $(newForm).append(answerLabel);
+    	console.log(count);
+    	if( count <= 0){
+    		console.log(answerBtn.checked);
+    	}
+    	else if(count === 0) {
+    		console.log("need more time")
+    	}
+
+
+  }
 });
+ timer(console.log(count));
+
 
 });
 
