@@ -1,10 +1,10 @@
 // function that waits for document to load before executing javascript within
 $(document).ready( function(){
 // time variable
-var count = 5;
-var incorrect = [];
-var correct = [];
-var unanswered = [];
+var count = 30;
+var incorrect = 0;
+var correct = 0;
+var unanswered = 0;
 
 // array of objects to output to the DOM
 var questions = [{
@@ -33,33 +33,20 @@ var questions = [{
 	value:"farm"
 }
 ];
-// function used to countdown the time remaining
-
-
+// appending start button to start page
 var questionDiv = $("#questions");
-
 $("#questions").append("<button>" + "start" + "</button>");
-
 $("button").css({"width":"300px","height":"50px","font-size":"30px"});
-//on click button will disappear and questions and answers will appear
+
+//on click button will disappear questions,answers and timer will appear
 $("button").click(function(){
 	$("#questions").empty();
-
+// creates timer display
 	var timerDiv = $("<div>");
-
 	$(timerDiv).text("Time remaining: " + count);
 	$("#questions").append(timerDiv);
 	
-	function timer(){var countDown = setInterval(function () {
-	count--;
-	$(timerDiv).text("Time remaining: " + count);
 	
-	if(count <= 0){
-		console.log("Time is up!!");
-		clearInterval(countDown);
-	}
-}, 1000);
-}
 
  questions.map(function(e, index) { 
  //creates buttons dynamically
@@ -85,24 +72,35 @@ $("button").click(function(){
       "name": e.value,
       "value": questionAnswer[i]
 
+
     });
 
     $(answerBtn).addClass("values");
 
     $(answerLabel).append(answerBtn);
     $(newForm).append(answerLabel);
-    	console.log(count);
-    	if( count <= 0){
-    		console.log(answerBtn.checked);
-    	}
-    	else if(count === 0) {
-    		console.log("need more time")
-    	}
+   console.log(answerBtn[i]);
+  }// end of for loop to display buttons and values
 
+});// end of map function
 
-  }
-});
- timer(console.log(count));
+ var countDown = setInterval(function () {
+	count--;
+	$(timerDiv).text("Time remaining: " + count);
+
+	if(count <= 0){
+			$("#questions").empty();
+			
+			$("#questions").append("<p>" + "correct: " + correct + "</p>");
+			$("#questions").append("<p>" + "incorrect: " + incorrect + "</p>");
+			$("#questions").append("<p>" + "unanswered: " + unanswered + "</p>");
+		
+		clearInterval(countDown);
+	}
+}, 1000);
+ console.log(correct);
+ console.log(incorrect);
+ console.log(unanswered);
 
 
 });
